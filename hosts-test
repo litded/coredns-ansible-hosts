@@ -1,0 +1,7 @@
+[dns]
+localhost  ansible_host=127.0.0.1
+[hosts]
+host-two  ansible_host=127.0.0.2
+host-three  ansible_host=127.0.0.3
+host-four  ansible_host=127.0.0.4
+host-five  ansible_host=127.0.0.5

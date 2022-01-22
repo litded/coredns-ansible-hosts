@@ -1,0 +1,6 @@
+- hosts: dns
+  become: true
+  tasks:
+    - include_role:
+        name: coredns-role
+        tasks_from: update_hosts

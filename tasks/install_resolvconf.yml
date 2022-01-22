@@ -1,0 +1,29 @@
+---
+- name: install resolvconf
+  become: true
+  become_user: root
+  apt:
+    state: present
+    name: resolvconf
+
+- name: Update resolv nameserver
+  become: true
+  become_user: root
+  lineinfile:
+    dest: /etc/resolvconf/resolv.conf.d/head
+    line: "nameserver 127.0.0.1"
+    owner: root
+
+- name: stop systemd-resolved
+  become: true
+  become_user: root
+  systemd:
+    name: systemd-resolved
+    state: stopped
+
+- name: disable systemd-resolved
+  become: true
+  become_user: root
+  systemd:
+    name: systemd-resolved
+    enabled: no

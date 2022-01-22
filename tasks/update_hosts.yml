@@ -1,0 +1,23 @@
+
+- ansible.builtin.template:
+    src: hosts.j2
+    dest: /etc/coredns/zones/ww.db
+    owner: root
+    group: root
+    mode: 0644
+
+- ansible.builtin.template:
+    src: ptr.j2
+    dest: /etc/coredns/zones/ww.127.0
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure CoreDNS is enabled on boot
+  become: true
+  systemd:
+    state: restarted
+    name: coredns
+    enabled: true
+  tags:
+    - coredns_run

@@ -1,0 +1,21 @@
+ww:53 {
+    prometheus
+    log
+    errors
+    cache
+    reload 10s
+    file /etc/coredns/zones/ww.db
+}
+
+0.127.in-addr.arpa:53 {
+    log
+    errors
+    cache
+    reload 10s
+    file /etc/coredns/zones/ww.127.0
+}
+.:53 {
+    reload 10s
+    forward . 8.8.8.8 1.1.1.2
+}
+

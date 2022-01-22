@@ -1,0 +1,37 @@
+---
+- import_tasks: install_resolvconf.yml
+  tags:
+    - instal resolvconf
+    - update resolvconf
+
+- import_tasks: preflight.yml
+  tags:
+    - coredns_install
+    - coredns_configure
+    - coredns_run
+
+- import_tasks: install.yml
+  become: true
+  tags:
+    - coredns_install
+
+- import_tasks: configure.yml
+  become: true
+  tags:
+    - coredns_configure
+
+
+- import_tasks: update_hosts.yml
+  become: true
+  tags:
+    - update_hosts
+
+- name: Ensure CoreDNS is enabled on boot
+  become: true
+  systemd:
+    state: restarted
+    name: coredns
+    enabled: true
+  tags:
+    - coredns_run
+

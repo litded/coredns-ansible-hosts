@@ -1,0 +1,18 @@
+@       3600 IN SOA ns1.ww. ns2.ww. (
+                                2018070500 ; serial
+                                7200       ; refresh in seconds (2 hours is 7200)
+                                3600       ; retry (1 hour)
+                                1209600    ; expire (2 weeks)
+                                3600       ; minimum (1 hour)
+                                )
+
+        3600 IN NS ns1.ww.
+        3600 IN NS ns2.ww.
+
+0.2      IN  PTR ns1.ww.
+0.3      IN  PTR ns2.ww.
+{% for host in groups.all %}
+{% if hostvars[host].ansible_host is defined %}
+{{ hostvars[host].ansible_host.split(".")[2:4] | reverse | join(".") }}  IN  PTR   {{ host }}.ww.
+{% endif %}
+{% endfor %}
