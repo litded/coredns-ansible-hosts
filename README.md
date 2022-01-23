@@ -8,7 +8,7 @@
 
 playbook-coredns-main.yml - установит и настроит coredns
 
-playbook-coredns-main.yml - только обновит файлы зон
+playbook-coredns-update-hosts.yml - только обновит файлы зон
 
 Для локального теста можете заменить имя роли на полный путь к роли
 
